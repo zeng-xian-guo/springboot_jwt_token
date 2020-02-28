@@ -1,0 +1,19 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/jwt?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC
+    username: root
+    password: root
+  jpa:
+    show-sql: true #设置控制台打印SQL
+    properties:
+      hibernate:
+        format_sql: true #格式化sql语句
+logging:
+  level:
+    org:
+      hibernate:
+        type:
+          descriptor:
+            sql:
+              BasicBinder: trace #显示sql的参数值

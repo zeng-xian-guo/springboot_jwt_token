@@ -1,0 +1,66 @@
+package com.example.demo.Common;
+
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.JWTVerifier;
+import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.interfaces.DecodedJWT;
+
+import java.io.UnsupportedEncodingException;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
+public class JwtTokenUtil {
+
+    //公用密钥-保存在服务端,客户端是不会知道密钥的,以防被攻击
+    public static String SECRET = "ThisIsASecret";
+
+    //生成Troke
+    public static String createToken(String id,String password) {
+        //签发时间
+        Date iatDate = new Date();
+        //System.out.println("iatDate:"  + iatDate);
+        //过地时间  1分钟后过期
+        Calendar nowTime = Calendar.getInstance();
+        //System.out.println("nowTime:" + nowTime);
+        nowTime.add(Calendar.MINUTE, 1);
+        Date expiresDate = nowTime.getTime();
+        //System.out.println("expiresDate:" + expiresDate);
+        Map<String, Object> map = new HashMap();
+        map.put("alg", "HS256");
+        map.put("typ", "JWT");
+        String token = JWT.create()
+                    .withHeader(map)
+                    //.withClaim( "name","Free码生") //设置 载荷 Payload
+                    //.withClaim("age","12")
+                    //.withClaim( "org","测试")
+                    .withExpiresAt(expiresDate)//设置过期时间,过期时间要大于签发时间
+                    .withIssuedAt(iatDate)//设置签发时间
+                    .withAudience(id) //设置 载荷 签名的观众
+                    .sign(Algorithm.HMAC256(password));//加密
+        return token;
+    }
+
+    //校验TOKEN
+    public static boolean verifyToken(String token,String password) throws UnsupportedEncodingException{
+        JWTVerifier verifier = JWT.require(Algorithm.HMAC256(password)).build();
+        try {
+            verifier.verify(token);
+            return true;
+        } catch (Exception e){
+            return false;
+        }
+    }
+
+    //获取Token信息
+    public static DecodedJWT getTokenInfo(String token) throws UnsupportedEncodingException{
+        JWTVerifier verifier = JWT.require(Algorithm.HMAC256(SECRET)).build();
+        try{
+            return verifier.verify(token);
+        } catch(Exception e){
+            throw new RuntimeException(e);
+        }
+    }
+
+    }
