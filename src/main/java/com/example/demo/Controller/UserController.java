@@ -25,7 +25,7 @@ public class UserController {
     @GetMapping("/test")
     @ResponseBody
     public String test(){
-        return "你已通过验证";
+        return "你已通过验证了";
     }
 
 }
