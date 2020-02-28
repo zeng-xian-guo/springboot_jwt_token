@@ -28,10 +28,4 @@ public class UserController {
         return "你已通过验证";
     }
 
-    @RequestMapping(path = "/zxg")
-    @ResponseBody
-    public User findUserById(@RequestParam(value="id",required=true) String id){
-        return userService.getUserById(id);
-    }
-
 }
