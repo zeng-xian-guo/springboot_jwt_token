@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+</head>
+<body>
+首页1234
+<script th:src="@{/static/js/ajax/jquery.min.js}"></script>
+<script th:src="@{/static/js/common/common.js}"></script>
+<script type="text/javascript">
+    var token = document.cookie.split("=")[1];
+    console.log( "获取token:" + token);
+    $.ajax({
+        url: ctx + "/api/test",
+        type: "post",
+        dataType: "json",
+        headers:{
+            'Content-Type':'application/json;charset=utf-8',
+            'token':token
+        },
+        success: function(data) {
+            console.log(JSON.stringify(data));
+            alert(JSON.stringify(data));
+        },
+        error:function (e) {
+            console.log("e:" + e);
+        }
+    });
+</script>
+</body>
+</html>

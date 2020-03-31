@@ -4,6 +4,16 @@ spring:
     url: jdbc:mysql://localhost:3306/jwt?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC
     username: root
     password: root
+  thymeleaf:
+    mode: HTML
+    encoding: utf-8
+    prefix: classpath:/templates/
+    suffix: .html
+    cache: false
+    check-template-location: true
+    servlet:
+      content-type: text/html
+    enabled: true
   jpa:
     show-sql: true #设置控制台打印SQL
     properties:
@@ -17,3 +27,10 @@ logging:
           descriptor:
             sql:
               BasicBinder: trace #显示sql的参数值
+server:
+  port: 8032
+  servlet:
+    tomcat:
+      uri-encoding: UTF-8
+      max-threads: 800
+      min-spare-threads: 30

@@ -8,9 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @Controller
 @RequestMapping(path = "/api")
 public class UserController {
+
     @Autowired
     private UserService userService;
 
@@ -19,13 +23,6 @@ public class UserController {
     @ResponseBody
     public Object findUser(@RequestBody User user) {
         return userService.getUser(user.getUsername());
-    }
-
-    @UserLoginToken
-    @GetMapping("/test")
-    @ResponseBody
-    public String test(){
-        return "你已通过验证了";
     }
 
 }
