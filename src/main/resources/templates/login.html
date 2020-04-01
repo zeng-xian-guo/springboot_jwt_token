@@ -80,8 +80,13 @@
 			},
 			data: JSON.stringify(jsonData),
 			success: function(data) {
-				document.cookie = "token="+ data.token;
-				window.location.href = "/api/index";
+				if(data.code == "200"){
+					document.cookie = "token="+ data.token;
+					window.location.href = "/api/index";
+				}else {
+					alert(data.msg);
+				}
+
 			},
 			error:function (e) {
 				console.log("e:" + e);

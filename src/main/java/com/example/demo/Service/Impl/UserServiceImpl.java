@@ -21,12 +21,13 @@ public class UserServiceImpl implements UserService {
         Map<String,Object> map = new HashMap<String,Object>();
         User userinfo = userRepository.findByUsernameAndPassword(username,password);
         if(userinfo != null){
+            map.put("code","200");
             map.put("data",userinfo);
             String token = JwtTokenUtil.createToken(userinfo.getUsername());
             map.put("token",token);
         }else {
-            map.put("data","");
-            map.put("token","");
+            map.put("code","404");
+            map.put("msg","用户不存在或密码有误!");
         }
         return map;
     }
