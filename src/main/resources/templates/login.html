@@ -27,7 +27,7 @@
 			<div class="login-center clearfix">
 				<div class="login-center-img"><img th:src="@{/static/img/password.png}"/></div>
 				<div class="login-center-input">
-					<input type="password" id="password"  name="password" value="123456" placeholder="请输入您的密码" onfocus="this.placeholder=''" onblur="this.placeholder='请输入您的密码'"/>
+					<input type="password" id="password"  name="password" value="admin" placeholder="请输入您的密码" onfocus="this.placeholder=''" onblur="this.placeholder='请输入您的密码'"/>
 					<div class="login-center-input-text">密码</div>
 				</div>
 			</div>
@@ -72,7 +72,7 @@
 			password:$("#password").val()
 		};
 		$.ajax({
-			url: ctx + "/api/login",
+			url: ctx + "/login",
 			type: "post",
 			dataType: "json",
 			headers:{

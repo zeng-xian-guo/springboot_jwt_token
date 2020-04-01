@@ -17,12 +17,12 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
 
     @Override
-    public Map<String,Object> getUser(String username) {
+    public Map<String,Object> getUser(String username,String password) {
         Map<String,Object> map = new HashMap<String,Object>();
-        User userinfo = userRepository.findByUsername(username);
+        User userinfo = userRepository.findByUsernameAndPassword(username,password);
         if(userinfo != null){
             map.put("user",userinfo);
-            String token = JwtTokenUtil.createToken(userinfo.getId(),userinfo.getPassword());
+            String token = JwtTokenUtil.createToken(userinfo.getUsername());
             map.put("token",token);
         }
         return map;

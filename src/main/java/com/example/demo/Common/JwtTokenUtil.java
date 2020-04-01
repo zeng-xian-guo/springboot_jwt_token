@@ -17,16 +17,13 @@ public class JwtTokenUtil {
     public static String SECRET = "ThisIsASecret";
 
     //生成Troke
-    public static String createToken(String id,String password) {
+    public static String createToken(String username) {
         //签发时间
-        Date iatDate = new Date();
-        //System.out.println("iatDate:"  + iatDate);
+        //Date iatDate = new Date();
         //过地时间  1分钟后过期
-        Calendar nowTime = Calendar.getInstance();
-        //System.out.println("nowTime:" + nowTime);
-        nowTime.add(Calendar.MINUTE, 1);
-        Date expiresDate = nowTime.getTime();
-        //System.out.println("expiresDate:" + expiresDate);
+        //Calendar nowTime = Calendar.getInstance();
+        //nowTime.add(Calendar.MINUTE, 1);
+        //Date expiresDate = nowTime.getTime();
         Map<String, Object> map = new HashMap();
         map.put("alg", "HS256");
         map.put("typ", "JWT");
@@ -37,15 +34,15 @@ public class JwtTokenUtil {
                     //.withClaim( "org","测试")
                     //.withExpiresAt(expiresDate)//设置过期时间,过期时间要大于签发时间
                     //.withIssuedAt(iatDate)//设置签发时间
-                    .withAudience(id) //设置 载荷 签名的观众
-                    .sign(Algorithm.HMAC256(password));//加密
+                    .withAudience(username) //设置 载荷 签名的观众
+                    .sign(Algorithm.HMAC256(SECRET));//加密
         System.out.println("后台生成token:" + token);
         return token;
     }
 
     //校验TOKEN
-    public static boolean verifyToken(String token,String password) throws UnsupportedEncodingException{
-        JWTVerifier verifier = JWT.require(Algorithm.HMAC256(password)).build();
+    public static boolean verifyToken(String token) throws UnsupportedEncodingException{
+        JWTVerifier verifier = JWT.require(Algorithm.HMAC256(SECRET)).build();
         try {
             verifier.verify(token);
             return true;

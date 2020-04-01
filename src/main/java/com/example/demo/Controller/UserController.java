@@ -15,14 +15,4 @@ import java.util.Map;
 @RequestMapping(path = "/api")
 public class UserController {
 
-    @Autowired
-    private UserService userService;
-
-    @PassToken
-    @RequestMapping(path = "/login")
-    @ResponseBody
-    public Object findUser(@RequestBody User user) {
-        return userService.getUser(user.getUsername());
-    }
-
 }

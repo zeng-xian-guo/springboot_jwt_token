@@ -14,7 +14,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "user")
 public class User {
-    @javax.persistence.Id
+    @Id
     String Id;
     String username;
     String password;

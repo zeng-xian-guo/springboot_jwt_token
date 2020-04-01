@@ -44,7 +44,7 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
                     throw new RuntimeException("无token，请重新登录");
                 }
                 // 获取 token 中的 user id
-                String userId;
+                /*String userId;
                 try {
                     userId = JWT.decode(token).getAudience().get(0);
                 } catch (JWTDecodeException j) {
@@ -53,9 +53,9 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
                 User user = userService.getUserById(userId);
                 if (user == null) {
                     throw new RuntimeException("用户不存在，请重新登录");
-                }
+                }*/
                 // 验证 token
-                if(JwtTokenUtil.verifyToken(token,user.getPassword())){
+                if(JwtTokenUtil.verifyToken(token)){
                     return true;
                 }else {
                     throw new RuntimeException("401");
