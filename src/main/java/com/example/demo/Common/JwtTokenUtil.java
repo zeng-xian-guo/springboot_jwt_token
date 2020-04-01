@@ -35,10 +35,11 @@ public class JwtTokenUtil {
                     //.withClaim( "name","Free码生") //设置 载荷 Payload
                     //.withClaim("age","12")
                     //.withClaim( "org","测试")
-                    .withExpiresAt(expiresDate)//设置过期时间,过期时间要大于签发时间
-                    .withIssuedAt(iatDate)//设置签发时间
+                    //.withExpiresAt(expiresDate)//设置过期时间,过期时间要大于签发时间
+                    //.withIssuedAt(iatDate)//设置签发时间
                     .withAudience(id) //设置 载荷 签名的观众
                     .sign(Algorithm.HMAC256(password));//加密
+        System.out.println("后台生成token:" + token);
         return token;
     }
 
