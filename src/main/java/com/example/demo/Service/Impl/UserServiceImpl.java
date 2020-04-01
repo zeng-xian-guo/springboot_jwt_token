@@ -31,8 +31,4 @@ public class UserServiceImpl implements UserService {
         return map;
     }
 
-    public User getUserById(String id){
-        return userRepository.findById(id).get();
-    }
-
 }
