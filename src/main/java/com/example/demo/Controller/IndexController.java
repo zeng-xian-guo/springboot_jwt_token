@@ -1,6 +1,7 @@
 package com.example.demo.Controller;
 
-import com.example.demo.annotation.UserLoginToken;
+import com.example.demo.Annotation.UserLoginToken;
+import com.example.demo.Common.Result;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,10 +26,7 @@ public class IndexController {
     @UserLoginToken
     @PostMapping("/test")
     @ResponseBody
-    public Object test(){
-        Map<String,Object> map = new HashMap<>();
-        map.put("code","200");
-        map.put("message","你已通过验证了");
-        return map;
+    public Result test(){
+        return Result.ok();
     }
 }

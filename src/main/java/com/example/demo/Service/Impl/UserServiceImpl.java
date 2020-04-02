@@ -17,8 +17,8 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
 
     @Override
-    public Map<String,Object> getUser(String username,String password) {
-        Map<String,Object> map = new HashMap<String,Object>();
+    public User getUser(String username,String password) {
+        /*Map<String,Object> map = new HashMap<String,Object>();
         User userinfo = userRepository.findByUsernameAndPassword(username,password);
         if(userinfo != null){
             map.put("code","200");
@@ -29,7 +29,8 @@ public class UserServiceImpl implements UserService {
             map.put("code","404");
             map.put("msg","用户不存在或密码有误!");
         }
-        return map;
+        return map;*/
+        return userRepository.findByUsernameAndPassword(username,password);
     }
 
 }

@@ -79,12 +79,12 @@
 				'Content-Type':'application/json;charset=utf-8'
 			},
 			data: JSON.stringify(jsonData),
-			success: function(data) {
-				if(data.code == "200"){
-					document.cookie = "token="+ data.token;
+			success: function(res) {
+				if(res.code == "200"){
+					document.cookie = "token="+ res.data.token;
 					window.location.href = "/api/index";
-				}else {
-					alert(data.msg);
+				}else if(res.code == "404"){
+					alert(res.message);
 				}
 
 			},

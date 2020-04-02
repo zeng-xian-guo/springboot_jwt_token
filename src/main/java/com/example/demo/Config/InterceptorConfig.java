@@ -1,6 +1,6 @@
-package com.example.demo.config;
+package com.example.demo.Config;
 
-import com.example.demo.interceptor.AuthenticationInterceptor;
+import com.example.demo.Interceptor.AuthenticationInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;

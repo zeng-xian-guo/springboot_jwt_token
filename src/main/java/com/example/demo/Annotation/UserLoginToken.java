@@ -1,4 +1,4 @@
-package com.example.demo.annotation;
+package com.example.demo.Annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -7,6 +7,6 @@ import java.lang.annotation.Target;
 
 @Target({ElementType.METHOD, ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface PassToken {
+public @interface UserLoginToken {
     boolean required() default true;
 }

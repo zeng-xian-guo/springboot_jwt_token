@@ -1,12 +1,9 @@
-package com.example.demo.interceptor;
+package com.example.demo.Interceptor;
 
-import com.auth0.jwt.JWT;
-import com.auth0.jwt.exceptions.JWTDecodeException;
 import com.example.demo.Common.JwtTokenUtil;
-import com.example.demo.Entity.User;
 import com.example.demo.Service.UserService;
-import com.example.demo.annotation.PassToken;
-import com.example.demo.annotation.UserLoginToken;
+import com.example.demo.Annotation.PassToken;
+import com.example.demo.Annotation.UserLoginToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
