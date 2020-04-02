@@ -43,4 +43,11 @@ public class GloablExceptionHandler {
         return Result.error().message(e.getMessage()).code(e.getCode());
     }
 
+    /**-------- 算法异常 --------**/
+    @ExceptionHandler(ArithmeticException.class)
+    @ResponseBody
+    public Result error(ArithmeticException e) {
+        log.error("算法异常：" + e.getMessage());
+        return Result.error().message(e.getMessage());
+    }
 }
