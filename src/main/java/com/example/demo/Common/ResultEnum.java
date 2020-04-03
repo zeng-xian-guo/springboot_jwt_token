@@ -6,6 +6,7 @@ import lombok.Getter;
 public enum ResultEnum {
 
     SUCCESS(200,"成功"),
+    UNEXIST_URL(404,"URL不存在"),
     UNEXIST_ERROR(404,"用户不存在或密码有误"),
     UNKNOWN_ERROR(520,"未知错误"),
     SYSTEM_ERROR(500, "系统异常"),
