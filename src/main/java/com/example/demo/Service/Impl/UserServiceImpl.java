@@ -1,6 +1,8 @@
 package com.example.demo.Service.Impl;
 
+import com.example.demo.Common.CustomerDefinedException;
 import com.example.demo.Common.JwtTokenUtil;
+import com.example.demo.Common.ResultEnum;
 import com.example.demo.Entity.User;
 import com.example.demo.Repository.UserRepository;
 import com.example.demo.Service.UserService;
@@ -17,20 +19,17 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
 
     @Override
-    public User getUser(String username,String password) {
-        /*Map<String,Object> map = new HashMap<String,Object>();
+    public Map<String,Object> getUser(String username,String password) {
+        Map<String,Object> map = new HashMap<String,Object>();
         User userinfo = userRepository.findByUsernameAndPassword(username,password);
         if(userinfo != null){
-            map.put("code","200");
-            map.put("data",userinfo);
+            map.put("list",userinfo);
             String token = JwtTokenUtil.createToken(userinfo.getUsername());
             map.put("token",token);
         }else {
-            map.put("code","404");
-            map.put("msg","用户不存在或密码有误!");
+            throw new CustomerDefinedException(ResultEnum.UNEXIST_ERROR);
         }
-        return map;*/
-        return userRepository.findByUsernameAndPassword(username,password);
+        return map;
     }
 
 }

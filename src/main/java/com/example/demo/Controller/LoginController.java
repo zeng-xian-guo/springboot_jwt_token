@@ -1,8 +1,6 @@
 package com.example.demo.Controller;
 
-import com.example.demo.Common.JwtTokenUtil;
 import com.example.demo.Common.Result;
-import com.example.demo.Common.ResultEnum;
 import com.example.demo.Entity.User;
 import com.example.demo.Service.UserService;
 import com.example.demo.Annotation.PassToken;
@@ -32,16 +30,8 @@ public class LoginController {
     @RequestMapping(path = "/login")
     @ResponseBody
     public Result findUser(@RequestBody User user) {
-        User userinfo = userService.getUser(user.getUsername(),user.getPassword());
-        if(userinfo != null){
-            String token = JwtTokenUtil.createToken(userinfo.getUsername());
-            Map<String,Object> map = new HashMap<String,Object>();
-            map.put("list",userinfo);
-            map.put("token",token);
-            return Result.ok().data(map);
-        }else {
-            return Result.setResult(ResultEnum.UNEXIST_ERROR);
-        }
+        Map<String,Object> map = userService.getUser(user.getUsername(),user.getPassword());
+        return Result.ok().data(map);
     }
 
 }

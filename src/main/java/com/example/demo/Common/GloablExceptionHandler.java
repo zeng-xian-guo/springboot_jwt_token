@@ -1,6 +1,8 @@
 package com.example.demo.Common;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.dao.DataAccessException;
+import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -50,4 +52,21 @@ public class GloablExceptionHandler {
         log.error("算法异常：" + e.getMessage());
         return Result.error().message(e.getMessage());
     }
+
+    /**-------- HTTP请求异常 --------**/
+    @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
+    @ResponseBody
+    public Result error(HttpRequestMethodNotSupportedException e) {
+        log.error("HTTP请求异常：" + e.getMessage());
+        return Result.error().message(e.getMessage());
+    }
+
+    /**-------- 数据库操作异常 --------**/
+    @ExceptionHandler(DataAccessException.class)
+    @ResponseBody
+    public Result error(DataAccessException e) {
+        log.error("数据库操作异常：" + e.getMessage());
+        return Result.error().message(e.getMessage());
+    }
+
 }

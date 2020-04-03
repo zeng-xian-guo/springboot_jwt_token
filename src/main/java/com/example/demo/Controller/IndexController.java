@@ -8,9 +8,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.HashMap;
-import java.util.Map;
-
 @Controller
 @RequestMapping(path = "/api")
 public class IndexController {
@@ -27,6 +24,6 @@ public class IndexController {
     @PostMapping("/test")
     @ResponseBody
     public Result test(){
-        return Result.ok();
+        return Result.ok().message("你已通过验证啦!");
     }
 }
