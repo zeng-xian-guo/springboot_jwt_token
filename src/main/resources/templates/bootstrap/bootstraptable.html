@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>BootstrapTable合并单元格</title>
+
+    <!-- Bootstrap -->
+    <link th:href="@{/static/css/bootstrap/bootstrap.min.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{/static/css/bootstrap/bootstrap-table.min.css}"  rel="stylesheet" type="text/css">
+
+    <!-- HTML5 shim 和 Respond.js 是为了让 IE8 支持 HTML5 元素和媒体查询（media queries）功能 -->
+    <!-- 警告：通过 file:// 协议（就是直接将 html 页面拖拽到浏览器中）访问页面时 Respond.js 不起作用 -->
+    <!--[if lt IE 9]>
+    <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+<table id="bootstrap-table" class="table table-hover"></table>
+<!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
+<script th:src="@{/static/js/ajax/jquery.min.js}"></script>
+<!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
+<script th:src="@{/static/js/bootstrap/bootstrap.min.js}"></script>
+<!-- 加载 Bootstrap-Table 插件 -->
+<script th:src="@{/static/js/bootstrap/bootstrap-table.min.js}"></script>
+<!-- 汉化插件 -->
+<script th:src="@{/static/js/bootstrap/bootstrap-table-zh-CN.min.js}"></script>
+<script type="application/javascript">
+    $('#bootstrap-table').bootstrapTable({
+        url: './../static/json/data.json',
+        /*sidePagination: "true",*/
+        pageSize: "10",             //每页显示10条
+        search:true,                //显示搜索
+        searchOnEnterKey:true,      //Enter触发搜索
+        pagination: true,           // 是否分页
+        /*singleSelect:true,          //单选
+        checkboxHeader:false,       //隐藏checkbox全选*/
+        columns: [
+            {
+                field: 'checkStatus',
+                checkbox:true
+            },
+            {
+                field: 'city',
+                title: '市'
+            },
+            {
+                field: 'area',
+                title: '区'
+            },
+            {
+                field: 'gdp',
+                title: 'GDP'
+            }
+        ],
+        onLoadSuccess: function () {//当所有数据被加载时触发处理函数
+            var data = $('#bootstrap-table').bootstrapTable('getData', true);//获取当前页数据
+            mergeCells(data,'city',1,$('#bootstrap-table'));
+        },
+        onPageChange: function (){//当页面更改页码或页面大小时触发
+            var data = $('#bootstrap-table').bootstrapTable('getData', true);
+            mergeCells(data,'city',1,$('#bootstrap-table'));
+        },
+    });
+
+    function mergeCells(data,fieldName,colspan,target){
+        //声明一个map计算相同属性值在data对象出现的次数和
+        var sortMap = {};
+        for(var i = 0 ; i < data.length ; i++){
+            for(var prop in data[i]){
+                if(prop == fieldName){
+                    var key = data[i][prop]     //fieldName的value
+                    if(sortMap.hasOwnProperty(key)){
+                        sortMap[key] = sortMap[key] * 1 + 1;
+                    } else {
+                        sortMap[key] = 1;
+                    }
+                    break;
+                }
+            }
+        }
+        /*for(var prop in sortMap){
+            console.log(prop,sortMap[prop])
+        }*/
+        //合并单元格
+        var index = 0;
+        for(var prop in sortMap){
+            var count = sortMap[prop] * 1;
+            $(target).bootstrapTable('mergeCells',{index:index, field:fieldName, colspan: colspan, rowspan: count});
+            index += count;
+        }
+    }
+</script>
+</body>
+</html>
