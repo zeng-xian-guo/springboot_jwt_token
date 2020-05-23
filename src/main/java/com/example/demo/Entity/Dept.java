@@ -18,5 +18,5 @@ public class Dept {
     String id;
     String pid;
     String name;
-    int count;
+    String level;
 }

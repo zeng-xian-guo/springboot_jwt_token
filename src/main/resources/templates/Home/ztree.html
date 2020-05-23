@@ -16,56 +16,39 @@
     <ul id="treeDemo" class="ztree"></ul>
 </div>
 <SCRIPT LANGUAGE="JavaScript">
-    /*$.ajax({
+    var zTreeObj;
+    $.ajax({
         url: ctx + "/api/tree",
         type: "post",
         dataType: "json",
         success: function(res) {
+            // zTree 的参数配置，深入使用请参考 API 文档（setting 配置详解）
+            var setting = {
+                data: {
+                    simpleData: {
+                        enable: true,
+                        idKey: "id",
+                        pIdKey: "pid",
+                        rootPId: ""
+                    }
+                },
+                view: {
+                    expandSpeed: "fast"
+                }
+            };
+            // zTree 的数据属性，深入使用请参考 API 文档（zTreeNode 节点数据详解）
+            var zNodes = res.data.list;
+            console.log("树：" + JSON.stringify(zNodes));
+            zTreeObj = $.fn.zTree.init($("#treeDemo"), setting, zNodes);
+            /*var nodes = zTreeObj.getNodes();
+            for (var i = 0; i < nodes.length; i++) { //设置节点展开
+                zTreeObj.expandNode(nodes[i], true, false, true);
+            }*/
         },
         error:function (e) {
             console.log("e:" + e);
         }
-    });*/
-    // zTree 的参数配置，深入使用请参考 API 文档（setting 配置详解）
-    var setting = {
-        async: {
-            enable: true,
-            url: ctx + "api/tree",
-            callback: {
-                beforeAsync: zTreeBeforeAsync,
-                onAsyncSuccess: zTreeOnAsyncSuccess,
-                onAsyncError: zTreeOnAsyncError
-            },
-        },
-        data: {
-            simpleData: {
-                enable: true,
-                idKey: "id",
-                pIdKey: "pid",
-                rootPId: ""
-            }
-        },view: {
-            expandSpeed: ""
-        }
-    };
-    // zTree 的数据属性，深入使用请参考 API 文档（zTreeNode 节点数据详解）
-    var zNodes = [
-        {name:"广东省", id:"1", count:500, times:1, isParent:true},
-        {name:"江西省", id:"2", count:1000, times:1, isParent:true}
-    ];
-    $.fn.zTree.init($("#treeDemo"), setting, zNodes);
-    function zTreeBeforeAsync() {
-        console.log("zTreeBeforeAsync");
-    }
-    function zTreeOnAsyncSuccess(treeNode) {
-        var zTree = $.fn.zTree.getZTreeObj("treeDemo");
-        treeNode.icon = "";
-        zTree.updateNode(treeNode);
-        zTree.selectNode(treeNode.children[0]);
-    }
-    function zTreeOnAsyncError() {
-        console.log("zTreeOnAsyncError");
-    }
+    });
 </SCRIPT>
 </body>
 </html>

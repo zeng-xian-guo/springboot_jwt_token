@@ -16,7 +16,7 @@ public class DeptServiceImpl implements DeptService {
 
     @Override
     public List<Dept> queryTreeSimpleData(){
-        return deptRepository.findAllByPid("0");
+        return deptRepository.findAllBylevel();
     }
 
 }
