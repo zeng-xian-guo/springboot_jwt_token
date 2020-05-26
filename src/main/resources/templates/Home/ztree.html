@@ -9,6 +9,8 @@
     <link rel="stylesheet" th:href="@{/static/css/ztree/zTreeStyle/zTreeStyle.css}" type="text/css">
     <script type="text/javascript" th:src="@{/static/js/ztree/jquery-1.4.4.min.js}"></script>
     <script type="text/javascript" th:src="@{/static/js/ztree/jquery.ztree.core.js}"></script>
+    <script type="text/javascript" th:src="@{/static/js/ztree/jquery.ztree.excheck.js}"></script>
+    <script type="text/javascript" th:src="@{/static/js/ztree/jquery.ztree.exedit.js}"></script>
     <script th:src="@{/static/js/common/common.js}"></script>
 </head>
 <body>
@@ -34,6 +36,9 @@
                 },
                 view: {
                     expandSpeed: "fast"
+                },
+                check: {
+                    enable: true
                 }
             };
             // zTree 的数据属性，深入使用请参考 API 文档（zTreeNode 节点数据详解）
