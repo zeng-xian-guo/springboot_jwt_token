@@ -8,6 +8,7 @@
 <body>
 首页1234
 <button onclick="toZtree()">ZTree</button>
+<button onclick="toFiles()">Files</button>
 <script th:src="@{/static/js/ajax/jquery.min.js}"></script>
 <script th:src="@{/static/js/common/common.js}"></script>
 <script type="text/javascript">
@@ -31,6 +32,9 @@
     });
     function toZtree() {
         window.location.href = "/api/ztree";
+    }
+    function toFiles() {
+        window.location.href = "/api/files/files";
     }
 </script>
 </body>
