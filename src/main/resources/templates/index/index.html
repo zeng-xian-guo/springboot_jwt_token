@@ -9,9 +9,52 @@
 首页1234
 <button onclick="toZtree()">ZTree</button>
 <button onclick="toFiles()">Files</button>
+<p>最简单的一个demo,自己发自己接收</p>
+<p><input type="text" id="txt" ></input><button id="button" >发送消息</button></p>
+<p id="recvContent">
+
+</p>
+<script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script>
 <script th:src="@{/static/js/ajax/jquery.min.js}"></script>
 <script th:src="@{/static/js/common/common.js}"></script>
 <script type="text/javascript">
+    <!-- ws客户端 start -->
+    var socket;
+    if(typeof(WebSocket) == "undefined") {
+        console.log("您的浏览器不支持WebSocket");
+    }else{
+        console.log("您的浏览器支持WebSocket");
+        socket = new WebSocket("ws://localhost:8032/websocket");
+        //打开事件
+        socket.onopen = function() {
+            console.log("Socket 已打开");
+        };
+        //获得消息事件
+        socket.onmessage = function(msg) {
+            console.log("onmessage:" + msg.data);
+            $("#recvContent").append('<div style="width:300px;text-align:left;"><span >' + msg.data + '</span></div><br/>');
+        }
+        //关闭事件
+        socket.onclose = function() {
+            console.log("Socket已关闭");
+        };
+        //发生了错误事件
+        socket.onerror = function() {
+            alert("Socket发生了错误");
+        };
+        window.onbeforeunload = function(){
+            socket.close();
+            return '';
+        };
+    }
+    //按钮绑定事件
+    $("#button").click(function(){
+        //发送消息
+        var value=$("#txt").val();
+        $("#txt").val("");
+        socket.send(value);
+    });
+
     var token = document.cookie.split("=")[1];
     console.log( "获取token:" + token);
     $.ajax({
