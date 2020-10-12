@@ -149,6 +149,13 @@
             <version>2.9.2</version>
         </dependency>
 
+        <!-- Hutool -->
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+            <version>5.4.4</version>
+        </dependency>
+
     </dependencies>
 
     <build>
