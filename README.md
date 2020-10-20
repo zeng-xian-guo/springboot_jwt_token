@@ -6,3 +6,7 @@ SpringBoot集成JWT实现token验证
 
 
 zTree -- jQuery 树插件:  http://www.treejs.cn/v3/main.php#_zTreeInfo
+
+#阿里巴巴开源的Sentinel限流器熔断器
+下载：https://github.com/alibaba/Sentinel/releases
+参考：https://mp.weixin.qq.com/s/XNWj4igYNBL9XpmKBnkUCg

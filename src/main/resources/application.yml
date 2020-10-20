@@ -25,6 +25,11 @@ spring:
       additional-paths: src/main/java  #重启目录
     freemarker:
       cache: false    #页面不加载缓存，修改即时生效
+  cloud:
+    sentinel:
+      transport:
+        dashboard: localhost:8080
+      #eager: true
 logging:
   level:
     org:
@@ -36,7 +41,9 @@ logging:
 server:
   port: 8032
   servlet:
+    context-path: /  #项目访问路径设置
     tomcat:
       uri-encoding: UTF-8
       max-threads: 800
       min-spare-threads: 30
+
