@@ -30,11 +30,23 @@ public class Result {
                 .setMessage(ResultEnum.SUCCESS.getMessage());
     }
 
+    public static Result ok(String message) {
+        return new Result()
+                .setCode(ResultEnum.SUCCESS.getCode())
+                .setMessage(message);
+    }
+
     // 通用失败
     public static Result error() {
         return new Result()
                 .setCode(ResultEnum.UNKNOWN_ERROR.getCode())
                 .setMessage(ResultEnum.UNKNOWN_ERROR.getMessage());
+    }
+
+    public static Result error(Integer code,String message) {
+        return new Result()
+                .setCode(code)
+                .setMessage(message);
     }
 
     // 自定义返回信息
