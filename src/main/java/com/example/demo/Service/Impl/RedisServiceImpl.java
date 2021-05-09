@@ -1,20 +1,14 @@
 package com.example.demo.Service.Impl;
 
 import com.example.demo.Common.Result;
-import com.example.demo.Redis.RedisClient;
 import com.example.demo.Redis.RedisUtil;
 import com.example.demo.Service.RedisService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
-import java.util.Map;
-
 @Service
 public class RedisServiceImpl implements RedisService {
 
-    @Autowired
-    private RedisClient redisClient;
     @Autowired
     private RedisUtil redisUtil;
 

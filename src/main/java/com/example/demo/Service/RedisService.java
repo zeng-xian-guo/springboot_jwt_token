@@ -1,9 +1,9 @@
 package com.example.demo.Service;
 
-import java.util.Map;
+import com.example.demo.Common.Result;
 
 public interface RedisService {
 
-    Map<String,Object>  getRedisData();
+    Result getRedisData();
 
 }
