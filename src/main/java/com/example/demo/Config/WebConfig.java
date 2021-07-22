@@ -2,6 +2,7 @@ package com.example.demo.Config;
 
 import com.example.demo.Interceptor.AuthenticationInterceptor;
 import com.example.demo.Interceptor.FangshuaInterceptor;
+import com.example.demo.Interceptor.MyInterceptor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -19,6 +20,8 @@ public class WebConfig implements WebMvcConfigurer {
         registry.addInterceptor(new FangshuaInterceptor()).addPathPatterns("/**");
         // 拦截所有请求，通过判断是否有 @LoginRequired 注解 决定是否需要登录
         registry.addInterceptor(new AuthenticationInterceptor()).addPathPatterns("/**");
+        //拦截器 demo
+        registry.addInterceptor(new MyInterceptor()).addPathPatterns("/interceptor/**");
     }
 
     @Override
