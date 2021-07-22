@@ -1,15 +1,30 @@
 package com.example.demo.Config;
 
+import com.example.demo.Interceptor.AuthenticationInterceptor;
+import com.example.demo.Interceptor.FangshuaInterceptor;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
-public class WebConfig extends WebMvcConfigurerAdapter {
+@EnableWebMvc
+public class WebConfig implements WebMvcConfigurer {
+
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        //配置拦截器
+        registry.addInterceptor(new FangshuaInterceptor()).addPathPatterns("/**");
+        // 拦截所有请求，通过判断是否有 @LoginRequired 注解 决定是否需要登录
+        registry.addInterceptor(new AuthenticationInterceptor()).addPathPatterns("/**");
+    }
+
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/**").addResourceLocations("classpath:/META-INF/resources/");
+        //静态资源放行
+        registry.addResourceHandler("/**").addResourceLocations(new String[]{"classpath:/static/","classpath:/META-INF/resources/"});
     }
 
     @Override

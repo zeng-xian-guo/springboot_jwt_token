@@ -2,17 +2,15 @@ package com.example.demo.Interceptor;
 
 import com.example.demo.Annotation.AccessLimit;
 import com.example.demo.Redis.RedisUtil;
-import com.example.demo.Service.RedisService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.StringUtils;
 import org.springframework.web.method.HandlerMethod;
-import org.springframework.web.servlet.AsyncHandlerInterceptor;
+import org.springframework.web.servlet.HandlerInterceptor;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-public class FangshuaInterceptor implements AsyncHandlerInterceptor {
+public class FangshuaInterceptor implements HandlerInterceptor {
     @Autowired
     private RedisUtil redisUtil;
 
