@@ -1,4 +1,6 @@
 spring:
+  application:
+    name: MySpringBoot #设置当前应用的名称
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/jwt?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC
@@ -60,4 +62,10 @@ server:
       uri-encoding: UTF-8
       max-threads: 800
       min-spare-threads: 30
+
+csb:
+  url: https://api.doctorxiong.club/v1/stock/rank
+  ak: ff15794f4a29492ba6cd4955bca9b64a
+  sk: ckYRtSc4ys2khvpM/ITVDh9erPY=
+  dk: tyrlur5o8t3i9iae
 
