@@ -91,9 +91,9 @@ public class CsbHttpClientController {
             return jsonObject;
         } catch (HttpCallerException e) {
             //e.printStackTrace();
-            jsonObject.put("msgCode","1");
-            jsonObject.put("msg",e.getMessage());
-            jsonObject.put("result","");
+            jsonObject.put("code","500");
+            jsonObject.put("message",e.getMessage());
+            jsonObject.put("data","");
             return jsonObject;
         }
     }
