@@ -1,0 +1,36 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/jwt?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC
+    username: root
+    password: root
+  thymeleaf:
+    mode: HTML
+    encoding: utf-8
+    prefix: classpath:/templates/
+    suffix: .html
+    cache: false
+    check-template-location: true
+    servlet:
+      content-type: text/html
+    enabled: true
+  jpa:
+    show-sql: true #设置控制台打印SQL
+    properties:
+      hibernate:
+        format_sql: true #格式化sql语句
+  devtools:
+    restart:
+      enabled: true #设置开启热部署
+      additional-paths: src/main/java  #重启目录
+    freemarker:
+      cache: false    #页面不加载缓存，修改即时生效
+
+logging:
+  level:
+    org:
+      hibernate:
+        type:
+          descriptor:
+            sql:
+              BasicBinder: trace #显示sql的参数值
